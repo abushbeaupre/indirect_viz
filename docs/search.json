@@ -65,15 +65,8 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Indirect Effects",
+    "title": "Extending the causal inference toolkit for ecologists: A visualization method of indirect effects",
     "section": "",
-    "text": "This is the main page for the Indirect Effects project.\nContent to be added."
-  },
-  {
-    "objectID": "index.html#welcome",
-    "href": "index.html#welcome",
-    "title": "Indirect Effects",
-    "section": "",
-    "text": "This is the main page for the Indirect Effects project.\nContent to be added."
+    "text": "Welcome to the webpage dedicated to visualizing indirect effects for a wide scope of use cases in causal and network analyses. Being ecologists, we have focused on applying the visualization method we developed to examples in ecology. The method can however be applied to all fields of research in which indirect effects are of interest.\nThis is the link towards the preprint of our article describing the method on Biorxiv\n\nAbstract Much ecological research focuses on how a given variable can affect another either directly or indirectly through the effect of one or more intervening variables in the context of causal inference and network analyses. Various methods to quantify the magnitude of these effects are available but are difficult to interpret in a meaningful way. We propose a method of visualizing indirect effects by means of plotting model predictions of an outcome in the presence of exposure and mediator variables. We demonstrate the method through simulations and apply them to a real-world example involving Tree Swallows (Tachycineta bicolor) and their obligatory hematophagous ectoparasites, Protocalliphora spp. bird blowflies. The simple procedure using commonplace software should prove instrumental to visualize and interpret relationships among variables involved in ecological mechanisms and can be seamlessly integrated to analysts’ workflows."
   }
 ]
