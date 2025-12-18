@@ -18,7 +18,7 @@
     "href": "simulations.html",
     "title": "Simulations",
     "section": "",
-    "text": "Using simulations, we will explore how to visualize indirect effects with 3 examples. These include the simple case in which we have an exposure, mediator and outcome variable. The second example is one where the exposure is actually composed of an interaction between two exposure variables. The third example is one where the mediator is composed of an interaction between two variables."
+    "text": "Using simulations, we will explore how to visualize indirect effects when we have an exposure, mediator and outcome variable."
   },
   {
     "objectID": "simulations.html#load-packages",

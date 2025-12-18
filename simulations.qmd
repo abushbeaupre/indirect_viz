@@ -2,7 +2,7 @@
 title: "Simulations"
 ---
 
-Using simulations, we will explore how to visualize indirect effects with 3 examples. These include the simple case in which we have an exposure, mediator and outcome variable. The second example is one where the exposure is actually composed of an interaction between two exposure variables. The third example is one where the mediator is composed of an interaction between two variables.
+Using simulations, we will explore how to visualize indirect effects when we have an exposure, mediator and outcome variable.
 
 # Set up workspace
 ## Load packages
@@ -93,15 +93,15 @@ create_dag_plot <- function(labels = c("Exposure", "Mediator", "Outcome"),
 }
 ```
 
-# Example 1 - simplest case
+# Worked example
 
 First, we will simulate data from this DAG:
 
 ```{r}
 #| code-fold: true
 #| warning: false
-#| fig-width: 6
-#| fig-height: 4
+#| fig-width: 5
+#| fig-height: 3.5
 # Create DAG with default labels
 DAG_default <- create_dag_plot()
 print(DAG_default)
