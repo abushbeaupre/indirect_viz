@@ -1,21 +1,15 @@
 ---
 title: "Extending the causal inference toolkit for ecologists: A visualization method of indirect effects"
-author:
-  - name: Allen Bush-Beaupré
-    affiliations:
-      - name: Université de Sherbrooke, Département de biologie, Sherbrooke, Canada
-        id: usherbrooke
-    orcid: 0000-0001-6989-9278
-  - name: Simon Coroller-Chouraki
-    affiliations:
-      - ref: usherbrooke
-    orcid: 0000-0001-8721-3727
-  - name: Marc Bélisle
-    affiliations:
-      - ref: usherbrooke
-      - name: Centre d'étude de la forêt (CÉF)
-    orcid: 0000-0003-0657-6724
 ---
+
+Allen Bush-Beaupré^1^, Simon Coroller-Chouraki^1^, Marc Bélisle^1,2^
+
+^1^Université de Sherbrooke, Département de biologie, Sherbrooke, Canada  
+^2^Centre d'étude de la forêt (CÉF)
+
+**Allen Bush-Beaupré**: allen.bush-beaupre@usherbrooke.ca | [ORCID: 0000-0001-6989-9278](https://orcid.org/0000-0001-6989-9278)  
+**Simon Coroller-Chouraki**: [ORCID: 0000-0001-8721-3727](https://orcid.org/0000-0001-8721-3727)  
+**Marc Bélisle**: [ORCID: 0000-0003-0657-6724](https://orcid.org/0000-0003-0657-6724)
 
 <style>
 body {
@@ -35,4 +29,9 @@ Much ecological research focuses on how a given variable can affect another eith
 
 ---
 This is the link towards the preprint of our article describing the method on Biorxiv
+This is the link to access and download used in the case study
 
+<div style="clear: both;"></div>
+
+We use simulations to display the method with a simple use case in the Simulations tab.
+In the Case Study tab, we show how to use the visualization method in the case of real world data and model in which the predictor variables have been scaled. This adds a subtle layer of complexity to the procedure but the code should help overcome this.
