@@ -29,9 +29,10 @@ Much ecological research focuses on how a given variable can affect another eith
 
 ---
 This is the link towards the preprint of our article describing the method on Biorxiv
+
 This is the link to access and download used in the case study
 
 <div style="clear: both;"></div>
 
-We use simulations to display the method with a simple use case in the Simulations tab.
-In the Case Study tab, we show how to use the visualization method in the case of real world data and model in which the predictor variables have been scaled. This adds a subtle layer of complexity to the procedure but the code should help overcome this.
+We use simulations to display the method with a simple use case in the [Simulations](simulations.qmd) tab.
+In the [Case Study](case_study.qmd) tab, we show how to use the visualization method in the case of real world data and model in which the predictor variables have been scaled. This adds a subtle layer of complexity to the procedure but the code should help overcome this.
