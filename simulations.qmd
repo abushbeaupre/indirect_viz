@@ -100,11 +100,12 @@ First, we will simulate data from this DAG:
 ```{r}
 #| code-fold: true
 #| warning: false
-#| fig-width: 5
+#| fig-width: 6
 #| fig-height: 7
 # Create DAG with default labels
 DAG_default <- create_dag_plot() +
-  theme(plot.margin = margin(t = 10, r = 10, b = 10, l = 50, unit = "pt"))
+  xlim(0.05, 1.4) +
+  theme(plot.margin = margin(t = 10, r = 10, b = 10, l = 10, unit = "pt"))
 print(DAG_default)
 ```
 
