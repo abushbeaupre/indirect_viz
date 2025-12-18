@@ -5,7 +5,7 @@ project:
     - docs/.nojekyll
 
 website:
-  title: "Indirect Effects"
+  title: "Visualizing Indirect Effects"
   navbar:
     left:
       - href: index.qmd
