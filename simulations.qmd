@@ -103,7 +103,8 @@ First, we will simulate data from this DAG:
 #| fig-width: 5
 #| fig-height: 7
 # Create DAG with default labels
-DAG_default <- create_dag_plot()
+DAG_default <- create_dag_plot() +
+  theme(plot.margin = margin(t = 10, r = 10, b = 10, l = 30, unit = "pt"))
 print(DAG_default)
 ```
 
