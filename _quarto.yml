@@ -1,0 +1,20 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Indirect Effects"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: simulations.qmd
+        text: Simulations
+      - href: case_study.qmd
+        text: Case Study
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
