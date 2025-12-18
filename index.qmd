@@ -1,5 +1,20 @@
 ---
 title: "Extending the causal inference toolkit for ecologists: A visualization method of indirect effects"
+author:
+  - name: Allen Bush-Beaupré
+    affiliations:
+      - name: Université de Sherbrooke, Département de biologie, Sherbrooke, Canada
+        id: usherbrooke
+    orcid: 0000-0001-6989-9278
+  - name: Simon Coroller-Chouraki
+    affiliations:
+      - ref: usherbrooke
+    orcid: 0000-0001-8721-3727
+  - name: Marc Bélisle
+    affiliations:
+      - ref: usherbrooke
+      - name: Centre d'étude de la forêt (CÉF)
+    orcid: 0000-0003-0657-6724
 ---
 
 <style>
@@ -8,9 +23,9 @@ body {
 }
 </style>
 
-Welcome to the webpage dedicated to visualizing indirect effects for a wide scope of use cases in causal and network analyses. Being ecologists, we have focused on applying the visualization method we developed to examples in ecology. The method can however be applied to all fields of research in which indirect effects are of interest. By leveraging commonly used software such as [`marginaleffects`](https://marginaleffects.com/) and `ggplot2`, our method can be easily integrated into most analysis workflows.
+Welcome to the webpage dedicated to visualizing indirect effects for a wide scope of use cases in causal and network analyses. Being ecologists, we have focused on applying the visualization method we developed to examples in ecology. The method can however be applied to all fields of research in which indirect effects are of interest. By leveraging commonly used software such as [`marginaleffects`](https://marginaleffects.com/) and [`ggplot2`](https://ggplot2-book.org/), our method can be easily integrated into most analysis workflows.
 
-<div style="float: right; width: 45%; margin-left: 20px; margin-bottom: 20px; font-size: 0.5em;">
+<div style="float: right; width: 45%; margin-left: 20px; margin-bottom: 20px; font-size: 0.3em;">
 ![**Figure 1.(A) Directed acyclic graph of a simulated example of the direct effect of an exposure variable on an outcome variable and its indirect effect through a mediator. (B) Prediction of the direct effect of the exposure on the outcome. (C) Prediction of the direct effect of the exposure on the mediator. (D) Prediction of the direct effect of the mediator on the outcome. (E) Prediction of the indirect effect of the exposure on the outcome superimposed on the prediction of the direct effect of the mediator on the outcome.** ](fig_1.png){width=100%}
 </div>
 
