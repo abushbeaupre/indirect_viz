@@ -101,7 +101,7 @@ First, we will simulate data from this DAG:
 #| code-fold: true
 #| warning: false
 #| fig-width: 8
-#| fig-height: 5
+#| fig-height: 7
 # Create DAG with default labels
 DAG_default <- create_dag_plot()
 print(DAG_default)
