@@ -365,6 +365,7 @@ plot_nestdays_protos
 We need the nestling-days values as predicted by hatching date to predict the values of *Protocalliphora* abundance along that predicted range. Since nestling-days are scaled in the model, we need to scale the predicted values using the original dataset, obtain the predicted *Protocalliphora* values and convert back to the original scale.
 
 ```{r}
+#| output: false
 p_ind_hatchdate_protos <- predictions(m_protos, 
                          newdata = datagrid(
                            scl_cumulated_chicks = (p_hatchdate_nestdays$estimate - mean(data_protos$cumulated_chicks)) / sd(data_protos$cumulated_chicks)), 
@@ -380,6 +381,7 @@ p_ind_hatchdate_protos <- predictions(m_protos,
 ### Prediction plot
 
 ```{r}
+#| output: false
 COLS <- alpha(colorRampPalette(c("seashell","tomato3"))(30),0.8)
 
 plot_ind_hatchdate_protos <- plot_nestdays_protos + 
@@ -405,6 +407,8 @@ plot_ind_hatchdate_protos
 ## Publication Figure 2
 
 ```{r}
+#| fig-width: 8
+#| fig-height: 8
 # Create right column with B and C stacked
 right_col_top_2 <- plot_hatchdate_proto /  plot_hatchdate_nestdays
 
