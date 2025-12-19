@@ -169,8 +169,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#predictions" id="toc-predictions" class="nav-link" data-scroll-target="#predictions">Predictions</a></li>
   <li><a href="#prediction-plot" id="toc-prediction-plot" class="nav-link" data-scroll-target="#prediction-plot">Prediction plot</a></li>
   </ul></li>
-  <li><a href="#protocalliphora-abundance-hatching-date-nestling-days-outcome-exposure-mediator" id="toc-protocalliphora-abundance-hatching-date-nestling-days-outcome-exposure-mediator" class="nav-link" data-scroll-target="#protocalliphora-abundance-hatching-date-nestling-days-outcome-exposure-mediator"><em>Protocalliphora</em> abundance ~ Hatching date + nestling-days (Outcome ~ Exposure + Mediator)</a>
-  <ul class="collapse">
+  <li><a href="#protocalliphora-abundance-hatching-date-nestling-days-outcome-exposure-mediator" id="toc-protocalliphora-abundance-hatching-date-nestling-days-outcome-exposure-mediator" class="nav-link" data-scroll-target="#protocalliphora-abundance-hatching-date-nestling-days-outcome-exposure-mediator"><em>Protocalliphora</em> abundance ~ Hatching date + nestling-days (Outcome ~ Exposure + Mediator)</a></li>
   <li><a href="#protocalliphora-abundance-hatching-date-outcome-exposure" id="toc-protocalliphora-abundance-hatching-date-outcome-exposure" class="nav-link" data-scroll-target="#protocalliphora-abundance-hatching-date-outcome-exposure"><em>Protocalliphora</em> abundance ~ Hatching date (Outcome ~ Exposure)</a>
   <ul class="collapse">
   <li><a href="#predictions-1" id="toc-predictions-1" class="nav-link" data-scroll-target="#predictions-1">Predictions</a></li>
@@ -182,7 +181,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#prediction-plot-2" id="toc-prediction-plot-2" class="nav-link" data-scroll-target="#prediction-plot-2">Prediction plot</a></li>
   </ul></li>
   </ul></li>
-  </ul></li>
   <li><a href="#indirect-effect" id="toc-indirect-effect" class="nav-link" data-scroll-target="#indirect-effect">Indirect effect</a>
   <ul>
   <li><a href="#predictions-3" id="toc-predictions-3" class="nav-link" data-scroll-target="#predictions-3">Predictions</a></li>
@@ -190,7 +188,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#publication-figure-2" id="toc-publication-figure-2" class="nav-link" data-scroll-target="#publication-figure-2">Publication Figure 2</a></li>
   </ul></li>
-  <li><a href="#case-2---in" id="toc-case-2---in" class="nav-link" data-scroll-target="#case-2---in">Case 2 - In</a></li>
+  <li><a href="#case-2---indirect-effect-of-hatch-date-on-protocalliphora-abundance-through-temperature" id="toc-case-2---indirect-effect-of-hatch-date-on-protocalliphora-abundance-through-temperature" class="nav-link" data-scroll-target="#case-2---indirect-effect-of-hatch-date-on-protocalliphora-abundance-through-temperature">Case 2 - Indirect effect of hatch date on <em>Protocalliphora</em> abundance through temperature</a></li>
   </ul>
 </nav>
     </div>
@@ -485,10 +483,11 @@ $ scl_timing_clutch    &lt;dbl&gt; -1.023968550, 0.726086790, 1.455276515, -1.02
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">te</span>(comp1,comp2) <span class="sc">+</span> <span class="fu">te</span>(scl_mean_t_protos, scl_mean_p_protos),</span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">family =</span> <span class="fu">tw</span>(<span class="at">link =</span> <span class="st">"log"</span>), <span class="at">method =</span> <span class="st">"REML"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="protocalliphora-abundance-hatching-date-outcome-exposure" class="level4">
-<h4 class="anchored" data-anchor-id="protocalliphora-abundance-hatching-date-outcome-exposure"><em>Protocalliphora</em> abundance ~ Hatching date (Outcome ~ Exposure)</h4>
-<section id="predictions-1" class="level5">
-<h5 class="anchored" data-anchor-id="predictions-1">Predictions</h5>
+</section>
+<section id="protocalliphora-abundance-hatching-date-outcome-exposure" class="level3">
+<h3 class="anchored" data-anchor-id="protocalliphora-abundance-hatching-date-outcome-exposure"><em>Protocalliphora</em> abundance ~ Hatching date (Outcome ~ Exposure)</h3>
+<section id="predictions-1" class="level4">
+<h4 class="anchored" data-anchor-id="predictions-1">Predictions</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>p_hatchdate_protos <span class="ot">&lt;-</span> <span class="fu">predictions</span>(m_protos, <span class="at">newdata =</span> </span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">datagrid</span>(<span class="at">scl_timing_clutch =</span> </span>
@@ -503,8 +502,8 @@ $ scl_timing_clutch    &lt;dbl&gt; -1.023968550, 0.726086790, 1.455276515, -1.02
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(year,farm))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="prediction-plot-1" class="level5">
-<h5 class="anchored" data-anchor-id="prediction-plot-1">Prediction plot</h5>
+<section id="prediction-plot-1" class="level4">
+<h4 class="anchored" data-anchor-id="prediction-plot-1">Prediction plot</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>plot_hatchdate_proto <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> p_hatchdate_protos, <span class="fu">aes</span>(<span class="at">x =</span> hatch_date , <span class="at">y =</span> estimate)) <span class="sc">+</span> </span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymax =</span> conf.high , <span class="at">ymin =</span> conf.low),<span class="at">alpha =</span> <span class="fl">0.05</span>)<span class="sc">+</span>  </span>
@@ -545,10 +544,10 @@ $ scl_timing_clutch    &lt;dbl&gt; -1.023968550, 0.726086790, 1.455276515, -1.02
 </div>
 </section>
 </section>
-<section id="protocalliphora-abundance-nestling-days-outcome-mediator" class="level4">
-<h4 class="anchored" data-anchor-id="protocalliphora-abundance-nestling-days-outcome-mediator"><em>Protocalliphora</em> abundance ~ Nestling-days (Outcome ~ Mediator)</h4>
-<section id="predictions-2" class="level5">
-<h5 class="anchored" data-anchor-id="predictions-2">Predictions</h5>
+<section id="protocalliphora-abundance-nestling-days-outcome-mediator" class="level3">
+<h3 class="anchored" data-anchor-id="protocalliphora-abundance-nestling-days-outcome-mediator"><em>Protocalliphora</em> abundance ~ Nestling-days (Outcome ~ Mediator)</h3>
+<section id="predictions-2" class="level4">
+<h4 class="anchored" data-anchor-id="predictions-2">Predictions</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>p_nestdays_protos <span class="ot">&lt;-</span> <span class="fu">predictions</span>(m_protos, <span class="at">newdata =</span> </span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">datagrid</span>(<span class="at">scl_cumulated_chicks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fu">min</span>(data_protos<span class="sc">$</span>scl_cumulated_chicks), <span class="at">to =</span> <span class="fu">max</span>(data_protos<span class="sc">$</span>scl_cumulated_chicks), <span class="at">by =</span> <span class="fl">0.1</span>)), <span class="at">exclude =</span> <span class="fu">c</span>(<span class="st">"s(farm)"</span>,<span class="st">"s(year)"</span>)) <span class="co">#population effect prediction</span></span>
@@ -558,8 +557,8 @@ $ scl_timing_clutch    &lt;dbl&gt; -1.023968550, 0.726086790, 1.455276515, -1.02
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cumulated_chicks =</span> scl_cumulated_chicks <span class="sc">*</span> <span class="fu">sd</span>(data_protos<span class="sc">$</span>cumulated_chicks) <span class="sc">+</span> <span class="fu">mean</span>(data_protos<span class="sc">$</span>cumulated_chicks)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(year, farm))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="prediction-plot-2" class="level5">
-<h5 class="anchored" data-anchor-id="prediction-plot-2">Prediction plot</h5>
+<section id="prediction-plot-2" class="level4">
+<h4 class="anchored" data-anchor-id="prediction-plot-2">Prediction plot</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>plot_nestdays_protos <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> p_nestdays_protos, <span class="fu">aes</span>(<span class="at">y =</span> estimate, <span class="at">x =</span> cumulated_chicks)) <span class="sc">+</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.5</span>, <span class="at">lineend =</span> <span class="st">"round"</span>) <span class="sc">+</span></span>
@@ -596,7 +595,6 @@ $ scl_timing_clutch    &lt;dbl&gt; -1.023968550, 0.726086790, 1.455276515, -1.02
 </div>
 </div>
 </div>
-</section>
 </section>
 </section>
 </section>
@@ -673,8 +671,8 @@ $ scl_timing_clutch    &lt;dbl&gt; -1.023968550, 0.726086790, 1.455276515, -1.02
 </div>
 </section>
 </section>
-<section id="case-2---in" class="level1">
-<h1>Case 2 - In</h1>
+<section id="case-2---indirect-effect-of-hatch-date-on-protocalliphora-abundance-through-temperature" class="level1">
+<h1>Case 2 - Indirect effect of hatch date on <em>Protocalliphora</em> abundance through temperature</h1>
 
 
 </section>

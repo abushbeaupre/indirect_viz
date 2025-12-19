@@ -265,8 +265,8 @@ m_protos <- gam(data = data_protos, formula = n_protos ~
               family = tw(link = "log"), method = "REML")
 ```
 
-#### *Protocalliphora* abundance ~ Hatching date (Outcome ~ Exposure)
-##### Predictions
+### *Protocalliphora* abundance ~ Hatching date (Outcome ~ Exposure)
+#### Predictions
 
 ```{r}
 p_hatchdate_protos <- predictions(m_protos, newdata = 
@@ -282,7 +282,7 @@ p_hatchdate_protos <- p_hatchdate_protos %>%
   select(-c(year,farm))
 ```
 
-##### Prediction plot
+#### Prediction plot
 
 ```{r}
 plot_hatchdate_proto <- ggplot(data = p_hatchdate_protos, aes(x = hatch_date , y = estimate)) + 
@@ -316,8 +316,8 @@ plot_hatchdate_proto <- ggplot(data = p_hatchdate_protos, aes(x = hatch_date , y
 plot_hatchdate_proto
 ```
 
-#### *Protocalliphora* abundance ~ Nestling-days (Outcome ~ Mediator)
-##### Predictions
+### *Protocalliphora* abundance ~ Nestling-days (Outcome ~ Mediator)
+#### Predictions
 
 ```{r}
 p_nestdays_protos <- predictions(m_protos, newdata = 
@@ -328,7 +328,7 @@ p_nestdays_protos <- p_nestdays_protos %>%
   mutate(cumulated_chicks = scl_cumulated_chicks * sd(data_protos$cumulated_chicks) + mean(data_protos$cumulated_chicks)) %>% select(-c(year, farm))
 ```
 
-##### Prediction plot
+#### Prediction plot
 
 ```{r}
 plot_nestdays_protos <- ggplot(data = p_nestdays_protos, aes(y = estimate, x = cumulated_chicks)) +
@@ -427,4 +427,4 @@ fig_2 <- top_section_2 / row3_2 +
 fig_2
 ```
 
-# Case 2 - In
+# Case 2 - Indirect effect of hatch date on *Protocalliphora* abundance through temperature
