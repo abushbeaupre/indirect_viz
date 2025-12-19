@@ -60,7 +60,7 @@
     "href": "case_study.html#dag-1",
     "title": "Case Study - Protocalliphora abundance in Tree Swallow nests",
     "section": "DAG",
-    "text": "DAG\n\nDAG_3 &lt;- create_dag_plot(\n  labels = c(\"Hatching date\", \"Temperature\", \"Abundance\")\n) +\n  xlim(0.05, 1.4) +\n  theme(plot.margin = margin(t = 10, r = 10, b = 10, l = 10, unit = \"pt\"))\n\nScale for x is already present.\nAdding another scale for x, which will replace the existing scale.\n\nprint(DAG_3)"
+    "text": "DAG\n\n\nCode\nDAG_3 &lt;- create_dag_plot(\n  labels = c(\"Hatching date\", \"Temperature\", \"Abundance\")\n) +\n  xlim(0.05, 1.4) +\n  theme(plot.margin = margin(t = 10, r = 10, b = 10, l = 10, unit = \"pt\"))\n\nprint(DAG_3)"
   },
   {
     "objectID": "case_study.html#model",

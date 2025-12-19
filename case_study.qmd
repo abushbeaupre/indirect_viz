@@ -431,6 +431,10 @@ fig_2
 ## DAG
 
 ```{r}
+#| code-fold: true
+#| warning: false
+#| fig-width: 6
+#| fig-height: 7
 DAG_3 <- create_dag_plot(
   labels = c("Hatching date", "Temperature", "Abundance")
 ) +
