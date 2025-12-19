@@ -156,7 +156,7 @@ comp2 — Second component from the rPCA describing agricultural landscape compo
 
 agemom — Age class of the Tree Swallow mother for the given clutch (2nd year = young adult; After 2nd year = older adult).
 
-# Case 1 - Indirect affect of hatch date on *Protocalliphora* abundance through nestling-days
+# Case 1 - Indirect effect of hatch date on *Protocalliphora* abundance through nestling-days
 
 ## DAG
 
@@ -407,7 +407,7 @@ plot_ind_hatchdate_protos
 ## Publication Figure 2
 
 ```{r}
-#| fig-width: 8
+#| fig-width: 9
 #| fig-height: 8
 # Create right column with B and C stacked
 right_col_top_2 <- plot_hatchdate_proto /  plot_hatchdate_nestdays
@@ -426,3 +426,5 @@ fig_2 <- top_section_2 / row3_2 +
 
 fig_2
 ```
+
+# Case 2 - In

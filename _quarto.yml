@@ -21,3 +21,4 @@ format:
     css: styles.css
     toc: true
     toc-depth: 5
+    number-depth: 5
