@@ -16,10 +16,12 @@ To better understand the DAGs and relationships, readers are referred to the ori
 ## Load packages
 
 ```{r}
+#| output: false
 library(tidyverse)
 library(brms)
 library(tidybayes)
 library(ggpubr)
+library(marginaleffects)
 ```
 
 ## Load data and models
@@ -34,3 +36,46 @@ Here, we look at the following DAG:
 
 We will focus on Snow characteristics, reproductive status, spring mass t+1, and autumn mass t+1. In the model, snow characteristics is actually three variables that each interact with Reproductive status for their respective effects on spring mass t+1. Then, Spring mass t+1 interacts with reproductive status for its effect on autumn mass t+1.
 
+The three-equation model is defined in brms as such:
+
+```{r}
+f_repro <- bf(lead_repro ~ 1 + ns(Age, 3) + wtd114 + pop_den + avg_snow_depth + days_count + median_density + (1 | ID) + (1 | Yr), 
+              family = bernoulli(link = "logit"))
+
+f_t_int <- bf(next_wtd12 ~ 1 + wtd114 + ns(Age, 3) + pop_den + 
+              lead_repro * avg_snow_depth + 
+              lead_repro * days_count + 
+              lead_repro * median_density + 
+              (1 | ID) + (1 | Yr), 
+              family = gaussian())
+
+# CHANGE
+#f_t1 <- bf(wtd114_next ~ 1 + next_wtd12 + ns(Age_next, 3) + lead_repro + pop_den_next + (1 | ID) + (1 | Yr_next), 
+#           family = gaussian())
+
+Mass_loss_female_repro_int <- brm(
+  f_repro + f_t_int + f_t1,
+  data = Data_females_uns, 
+  set_rescor(FALSE), 
+  cores = 4, threads = threading(2), backend = "cmdstanr",warmup = 2000, iter = 6000, chains = 4
+)
+```
+
+Crémel et al. plot all of the direct effects in the DAG so we will not be repeating this here. We will only focus on the interacting effect of snow variables with reproductive status on spring mass and the interacting effect of spring mass and reproductive status on autumn mass.
+
+## Spring mass ~ Snow * Reproductive status
+```{r}
+
+```
+
+## Autumn mass ~ Spring mass * Reproductive status
+
+```{r}
+
+```
+
+## Indirect effect of snow on autumn mass
+
+```{r}
+
+```
