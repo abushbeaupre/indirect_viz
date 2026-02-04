@@ -13,7 +13,9 @@ website:
       - href: simulations.qmd
         text: Simulations
       - href: case_study.qmd
-        text: Case Study
+        text: Case Study - Blowfly larvae
+      - href: kallan_case_study.qmd
+        text: Case Study - Bighorn Sheep
 
 format:
   html:
