@@ -1,0 +1,36 @@
+---
+title: "Case Study - Effects of snow cover characteristics and reproduction on body mass in bighorn sheep (*Ovis canadensis*) "
+format: html
+editor: source
+---
+
+Here, we display the use of the visualization method for indirect effects with a real-world example of the carry-over effects of snow cover characteristics on subsequent spring and automn mass of bighorn sheep on Ram mountain (Alberta, CAN). The original article by Crémel et al. can be found at LINK. This use case is more complex than the ones presented in the original article describing the method (LINK) as there is more than one mediator involved and in some cases, the exposure interacts with a mediator and in another case, the exposure interacts with a mediator and both mediators interact with one-another. We will display how the visualization method can be used to make such complex relationships more intuitive to interpret. 
+
+The full DAGs for the three analyses we will be working here can be found below:
+
+![](Kallan_DAG.png)
+
+To better understand the DAGs and relationships, readers are referred to the original publication.
+
+# Set up workspace
+## Load packages
+
+```{r}
+library(tidyverse)
+library(brms)
+library(tidybayes)
+library(ggpubr)
+```
+
+## Load data and models
+
+```{r}
+
+```
+
+# Female model
+Here, we look at the following DAG:
+![](Kallan_DAG_females.png)
+
+We will focus on Snow characteristics, reproductive status, spring mass t+1, and autumn mass t+1. In the model, snow characteristics is actually three variables that each interact with Reproductive status for their respective effects on spring mass t+1. Then, Spring mass t+1 interacts with reproductive status for its effect on autumn mass t+1.
+
