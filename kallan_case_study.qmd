@@ -19,14 +19,28 @@ To better understand the DAGs and relationships, readers are referred to the ori
 #| output: false
 library(tidyverse)
 library(brms)
+library(cmdstanr)
 library(tidybayes)
 library(ggpubr)
 library(marginaleffects)
+library(splines)
 ```
 
 ## Load data and models
 
 ```{r}
+data_all <- readRDS("mass_loss_data_all_Kallan_Cremel.rds")
+
+glimpse(data_all)
+
+# Female data and model
+## data
+Data_females_uns <- data_all$Data_females_uns 
+
+glimpse(Data_females_uns)
+
+## Model
+Mass_loss_female_repro_int <- readRDS("Mass_loss_female_repro_int_uns_Kallan_Cremel.rds")
 
 ```
 
@@ -39,6 +53,7 @@ We will focus on Snow characteristics, reproductive status, spring mass t+1, and
 The three-equation model is defined in brms as such:
 
 ```{r}
+#| eval: false
 f_repro <- bf(lead_repro ~ 1 + ns(Age, 3) + wtd114 + pop_den + avg_snow_depth + days_count + median_density + (1 | ID) + (1 | Yr), 
               family = bernoulli(link = "logit"))
 
@@ -49,9 +64,8 @@ f_t_int <- bf(next_wtd12 ~ 1 + wtd114 + ns(Age, 3) + pop_den +
               (1 | ID) + (1 | Yr), 
               family = gaussian())
 
-# CHANGE
-#f_t1 <- bf(wtd114_next ~ 1 + next_wtd12 + ns(Age_next, 3) + lead_repro + pop_den_next + (1 | ID) + (1 | Yr_next), 
-#           family = gaussian())
+f_t1 <- bf(wtd114_next ~ 1 + lead_repro*next_wtd12 + ns(Age_next, 3) + pop_den_next + (1 | ID) + (1 | Yr_next), 
+           family = gaussian())
 
 Mass_loss_female_repro_int <- brm(
   f_repro + f_t_int + f_t1,
@@ -61,21 +75,131 @@ Mass_loss_female_repro_int <- brm(
 )
 ```
 
-Crémel et al. plot all of the direct effects in the DAG so we will not be repeating this here. We will only focus on the interacting effect of snow variables with reproductive status on spring mass and the interacting effect of spring mass and reproductive status on autumn mass.
+Crémel et al. plot all of the direct effects in the DAG so we will not be repeating this here. We will only focus on the interacting effect of snow variables with reproductive status on spring mass and the interacting effect of spring mass and reproductive status on autumn mass. For the demonstration, we will work only with Average snow depth as the Snow variable. See Crémel et al. for all indirect effects. 
 
 ## Spring mass ~ Snow * Reproductive status
 ```{r}
+col_repro <- c("Non-reproductive" = "#d95f02", "Reproductive" = "#2ca25f")
+
+p_smass_snow <- predictions(Mass_loss_female_repro_int,
+                           newdata = datagrid(avg_snow_depth = seq(from = min(Data_females_uns$avg_snow_depth),
+                                                                    to = max(Data_females_uns$avg_snow_depth),
+                                                                    by = 1),
+                                               lead_repro = c(0,1)),
+                           re_formula = NA,       # Population-level predictions
+                           type = "response",     # epred
+                           resp = "nextwtd12") |> # spring mass
+               get_draws(shape = "rvar") |>       # convert to rvar
+               mutate(Reproduction_status = factor(lead_repro, 
+                                      levels = c(0, 1), 
+                                      labels = c("Non-reproductive", "Reproductive"))) 
+
+glimpse(p_smass_snow)
+
+plot_smass_snow <- ggplot(p_smass_snow, aes(x = avg_snow_depth, ydist = rvar, fill = Reproduction_status)) +
+  stat_lineribbon(aes(color = Reproduction_status, fill = Reproduction_status),
+                  .width = seq(0.5, 0.95, length.out = 20), 
+                  alpha = 0.05) +
+  scale_color_manual(values = col_repro) +
+  scale_fill_manual(values = col_repro) +
+  labs(
+    x = "Average snow depth (cm)",
+    y = "Spring mass (kg)",
+    color = "Reproduction status (t+1)",
+    fill = "Reproduction status (t+1)"
+  ) +
+  theme_pubr() +
+  theme(legend.position = "none")
+
+plot_smass_snow
 
 ```
 
 ## Autumn mass ~ Spring mass * Reproductive status
 
 ```{r}
+p_amass_smass <- predictions(Mass_loss_female_repro_int,
+                           newdata = datagrid(next_wtd12 = seq(from = min(Data_females_uns$next_wtd12),
+                                                                    to = max(Data_females_uns$next_wtd12),
+                                                                    by = 1),
+                                               lead_repro = c(0,1)),
+                           re_formula = NA,         # Population-level predictions
+                           type = "response",       # epred
+                           resp = "wtd114next") |>  # autumn mass
+               get_draws(shape = "rvar") |>         # convert to rvar
+               mutate(Reproduction_status = factor(lead_repro, 
+                                      levels = c(0, 1), 
+                                      labels = c("Non-reproductive", "Reproductive"))) 
 
+glimpse(p_amass_smass)
+
+plot_amass_smass <- ggplot() +
+  stat_lineribbon(data = p_amass_smass, aes(x = next_wtd12, ydist = rvar, fill = Reproduction_status),
+                  .width = seq(0.5, 0.95, length.out = 20), 
+                  alpha = 0.05, color = "black") +
+  scale_fill_manual(values = col_repro) +
+  guides(fill = guide_legend(override.aes = list(alpha = 1, fill = NA, color = col_repro))) +
+  labs(
+    x = "Spring mass (kg)",
+    y = "Autumn mass (kg)",
+    fill = "Reproduction status (t+1)"
+  ) +
+  theme_pubr() +
+  theme(legend.position = "inside",
+        legend.position.inside = c(0.2, 0.8))
+
+plot_amass_smass
 ```
+
 
 ## Indirect effect of snow on autumn mass
 
+### Predictions
+We want to predict autumn mass from the predicted values of spring mass as a function of snow depth and reproductive status
 ```{r}
+# the estimate column of p_smass_snow is the median of the posterior distribution
+# Let's simplify the prediction object to work with after
+p_smass_snow |> 
+  as_tibble() |> 
+  select(estimate, avg_snow_depth, lead_repro) |>
+  rename(next_wtd12 = estimate) -> spring_mass_pred
 
+# Custom prediction grid
+datagrid(model = Mass_loss_female_repro_int,
+         next_wtd12 = spring_mass_pred$next_wtd12) |>
+  # need to add lead_repro separately as grid_type = "dataframe" argument throws an error
+  select(-lead_repro) |>      
+  left_join(spring_mass_pred |> select(next_wtd12, lead_repro)) -> f_snow_indirect_pred_grid
+
+# Predictions
+p_ind_snow_smass <- predictions(Mass_loss_female_repro_int,
+                           newdata = f_snow_indirect_pred_grid,
+                           re_formula = NA,         # Population-level predictions
+                           type = "response",       # epred
+                           resp = "wtd114next") |>  # autumn mass
+                    mutate(Reproduction_status = factor(lead_repro, 
+                                      levels = c(0, 1), 
+                                      labels = c("Non-reproductive", "Reproductive"))) |>
+              # Add snow values from spring mass prediction grid
+                    select(-avg_snow_depth) |>
+                    left_join(spring_mass_pred)
 ```
+
+
+### plot
+
+```{r}
+COLS <- alpha(colorRampPalette(c("#d0ddd6","#47a6ddb7"))(30),0.8)
+
+plot_amass_smass + 
+  geom_line(data = p_ind_snow_smass, aes(x = next_wtd12, y = estimate, color = avg_snow_depth, linewidth = avg_snow_depth, group = Reproduction_status), lineend = "round") +
+  scale_color_gradientn(colours = COLS, name = "Avg Snow Depth") +
+  guides(linewidth = "none") +
+  theme(legend.direction = "horizontal")
+```
+
+# Lamb model
+
+
+
+# Male model
