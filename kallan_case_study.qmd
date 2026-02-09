@@ -91,10 +91,11 @@ p_smass_snow <- predictions(Mass_loss_female_repro_int,
                                       levels = c(0, 1), 
                                       labels = c("Non-reproductive", "Reproductive"))) 
 
-plot_smass_snow <- ggplot(p_smass_snow, aes(x = avg_snow_depth, ydist = rvar, fill = Reproduction_status)) +
-  stat_lineribbon(aes(color = Reproduction_status, fill = Reproduction_status),
+plot_smass_snow <- ggplot() +
+  stat_lineribbon(data = p_smass_snow, aes(x = avg_snow_depth, ydist = rvar, fill = Reproduction_status),
                   .width = seq(0.5, 0.95, length.out = 20), 
-                  alpha = 0.05) +
+                  alpha = 0.05, color = "black") +
+  guides(fill = guide_legend(override.aes = list(alpha = 1, fill = NA, color = col_repro))) +
   scale_color_manual(values = col_repro) +
   scale_fill_manual(values = col_repro) +
   labs(
@@ -105,7 +106,7 @@ plot_smass_snow <- ggplot(p_smass_snow, aes(x = avg_snow_depth, ydist = rvar, fi
   ) +
   theme_pubr() +
   theme(legend.position = "inside",
-        legend.position.inside = c(0.2, 0.8))
+        legend.position.inside = c(0.2, 0.2))
 
 plot_smass_snow
 
@@ -194,7 +195,7 @@ plot_amass_smass +
         legend.position = "bottom")
 ```
 
-The indirect effect is small compared to the direct effect so let's zomm in a little
+The indirect effect is small compared to the direct effect so let's zoom in a little
 
 ```{r}
 plot_amass_smass + 
