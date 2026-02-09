@@ -29,15 +29,12 @@ library(splines)
 ## Load data and models
 
 ```{r}
+#| output: false
 data_all <- readRDS("mass_loss_data_all_Kallan_Cremel.rds")
-
-glimpse(data_all)
 
 # Female data and model
 ## data
 Data_females_uns <- data_all$Data_females_uns 
-
-glimpse(Data_females_uns)
 
 ## Model
 Mass_loss_female_repro_int <- readRDS("Mass_loss_female_repro_int_uns_Kallan_Cremel.rds")
@@ -94,8 +91,6 @@ p_smass_snow <- predictions(Mass_loss_female_repro_int,
                                       levels = c(0, 1), 
                                       labels = c("Non-reproductive", "Reproductive"))) 
 
-glimpse(p_smass_snow)
-
 plot_smass_snow <- ggplot(p_smass_snow, aes(x = avg_snow_depth, ydist = rvar, fill = Reproduction_status)) +
   stat_lineribbon(aes(color = Reproduction_status, fill = Reproduction_status),
                   .width = seq(0.5, 0.95, length.out = 20), 
@@ -109,7 +104,8 @@ plot_smass_snow <- ggplot(p_smass_snow, aes(x = avg_snow_depth, ydist = rvar, fi
     fill = "Reproduction status (t+1)"
   ) +
   theme_pubr() +
-  theme(legend.position = "none")
+  theme(legend.position = "inside",
+        legend.position.inside = c(0.2, 0.8))
 
 plot_smass_snow
 
@@ -130,8 +126,6 @@ p_amass_smass <- predictions(Mass_loss_female_repro_int,
                mutate(Reproduction_status = factor(lead_repro, 
                                       levels = c(0, 1), 
                                       labels = c("Non-reproductive", "Reproductive"))) 
-
-glimpse(p_amass_smass)
 
 plot_amass_smass <- ggplot() +
   stat_lineribbon(data = p_amass_smass, aes(x = next_wtd12, ydist = rvar, fill = Reproduction_status),
@@ -157,6 +151,7 @@ plot_amass_smass
 ### Predictions
 We want to predict autumn mass from the predicted values of spring mass as a function of snow depth and reproductive status
 ```{r}
+#| output: false
 # the estimate column of p_smass_snow is the median of the posterior distribution
 # Let's simplify the prediction object to work with after
 p_smass_snow |> 
@@ -195,7 +190,20 @@ plot_amass_smass +
   geom_line(data = p_ind_snow_smass, aes(x = next_wtd12, y = estimate, color = avg_snow_depth, linewidth = avg_snow_depth, group = Reproduction_status), lineend = "round") +
   scale_color_gradientn(colours = COLS, name = "Avg Snow Depth") +
   guides(linewidth = "none") +
-  theme(legend.direction = "horizontal")
+  theme(legend.direction = "horizontal",
+        legend.position = "bottom")
+```
+
+The indirect effect is small compared to the direct effect so let's zomm in a little
+
+```{r}
+plot_amass_smass + 
+  geom_line(data = p_ind_snow_smass, aes(x = next_wtd12, y = estimate, color = avg_snow_depth, linewidth = avg_snow_depth, group = Reproduction_status), lineend = "round") +
+  scale_color_gradientn(colours = COLS, name = "Avg Snow Depth") +
+  guides(linewidth = "none") +
+  theme(legend.direction = "horizontal",
+        legend.position = "bottom") +
+  coord_cartesian(xlim = c(50, 60), ylim = c(60, 80))
 ```
 
 # Lamb model
