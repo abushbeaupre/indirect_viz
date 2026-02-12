@@ -15,32 +15,8 @@ The website includes:
 - **Case Study - Blowfly larvae**: Real-world application using Tree Swallows (*Tachycineta bicolor*) and their ectoparasites (*Protocalliphora* spp.)
 - **Case Study - Bighorn Sheep**: Complex multi-mediator example examining carry-over effects of snow cover on bighorn sheep (*Ovis canadensis*) body mass
 
-## Building the website
-
-To render the website locally:
-```bash
-quarto render
-```
-
-To preview the website:
-```bash
-quarto preview
-```
-
-## Publishing to GitHub Pages
-
-1. Make sure the repository is initialized and connected to GitHub
-2. Render the website: `quarto render`
-3. Commit and push all files including the `docs/` folder
-4. On GitHub, go to Settings > Pages
-5. Set Source to "Deploy from a branch"
-6. Select the `main` branch and `/docs` folder
-7. Click Save
-
-The website is published at: https://abushbeaupre.github.io/indirect_viz/
-
 ## Citation
 
-If you use this visualization method, please cite the preprint available on bioRxiv (link to be added).
+If you use this visualization method, please cite the preprint available on bioRxiv (https://www.biorxiv.org/content/10.64898/2026.02.09.704914v1).
 
 Data for the Tree Swallow case study is available at: https://doi.org/10.5281/zenodo.17980480
