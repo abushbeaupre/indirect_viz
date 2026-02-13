@@ -201,7 +201,7 @@ p_ind_snow_smass <- predictions(Mass_loss_female_repro_int,
 ### plot
 
 ```{r}
-COLS <- alpha(colorRampPalette(c("#d0ddd6","#47a6ddb7"))(30),0.8)
+COLS <- alpha(colorRampPalette(c("#f7fcf9","#0b6da7b7"))(30),0.8)
 
 plot_amass_smass + 
   geom_line(data = p_ind_snow_smass, aes(x = next_wtd12, y = estimate, color = avg_snow_depth, linewidth = avg_snow_depth, group = Reproduction_status), lineend = "round") +
@@ -428,9 +428,7 @@ plot_smass_snow_males <- ggplot() +
     y = "Spring mass (kg)",
     fill  = "Population density" ~ (ind),
   )  +
-  theme_pubr() +
-  theme(legend.position = "inside",
-        legend.position.inside = c(0.3, 0.7))
+  theme_pubr()
 
 plot_smass_snow_males
 ```
@@ -486,16 +484,17 @@ p_ind_snow_smass_males <- predictions(Mass_loss_male_pop,
 
 plot_ind_snow_males <- ggplot() +
   geom_line(data = p_ind_snow_smass_males, aes(x = next_wtd12, y = estimate, color = median_density_uns, linewidth = median_density_uns), lineend = "round") +
-  scale_color_gradientn(colours = COLS, name = "Med Snow Density") +
+  scale_color_gradientn(colours = COLS, name = expression("Median snow density " (kg/m^3))) +
   guides(linewidth = "none") +
-  facet_wrap(~ Pop_Density_Label) +
-  theme(legend.direction = "horizontal",
-        legend.position = "bottom") +
+  facet_wrap(~ Pop_Density_Label, 
+             labeller = as_labeller(c(`25` = "Pop. dens. = 25",
+                                      `52` = "Pop. dens. = 52",
+                                      `79` = "Pop. dens. = 79"))) +
   labs(
     x = "Spring mass (kg)", 
     y = "Autumn mass (kg)"
   )  +
-  theme_pubr()
+  theme_pubr() 
 
 plot_ind_snow_males
 ```
