@@ -365,6 +365,7 @@ We will focus on Snow characteristics, sex, spring mass t+1, and autumn mass t+1
 The two-equation model is defined in brms as such:
 
 ```{r}
+#| eval: false
 f_male_t1 <- bf(wtd114_next ~ 1 + scale(next_wtd12) + ns(Age_next, 3) + pop_den_next + (1 | ID) + (1 | Yr_next), family = gaussian())
 
 f_male_pop_t <- bf(next_wtd12 ~ 1 + wtd114 + ns(Age, 3) + 
@@ -504,3 +505,5 @@ Now, we combine all plots
 ```{r}
 (plot_smass_snow_males + plot_amass_smass_males) / plot_ind_snow_males
 ```
+
+We can see here that snow density has a stronger positive effect through spring mass on autumn when population density is low compared to a weaker but negative effect when population density is high.
